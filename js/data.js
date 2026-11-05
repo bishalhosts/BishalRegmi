@@ -145,13 +145,13 @@ const SITE = {
       link: "https://bishalhosts.github.io/HamroNepal/"
     },
     {
-      title: "Ma-yor",
+      title: "For Gov person",
       org: "Personal",
       type: "Official",
       year: "2025",
-      desc: "Personal website for Ma-yor, showcasing my work and skills.",
+      desc: "Personal website for For Gov person, showcasing my work and skills.",
       tags: ["personal", "web"],
-      link: "https://bishalhosts.github.io/Ma-yor/"
+      link: "https://bishalhosts.github.io/For-Gov-person/"
     },
    /*
     {

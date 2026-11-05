@@ -17,7 +17,7 @@ const SITE = {
   updated: "November 2026",
   careerStart: 2013,                        // year you started working - "years of experience" updates itself every year
   typing: ["Building reliable software", "Designing clean systems", "Shipping useful tools", "Learning something new every day"],   // typed in the terminal line
-  API: "PASTE_APPS_SCRIPT_WEB_APP_URL_HERE", // Google Sheets contact form (see README -> google-apps-script/Code.gs)
+  API: "https://script.google.com/macros/s/AKfycbwGG8wpbye5X620chdhlCfMb7MfbWjd2aRPthAJtb93VvvogFm5fg5SgXwaI1_z-jD6RA/exec", // Google Sheets contact form (see README -> google-apps-script/Code.gs)
   siteUrl: "",                              // e.g. "https://yourname.github.io" (used for sharing previews)
   heroButtons: [                             // first one is the highlighted button
     ["About me", "about.html"], ["View projects", "projects.html"], ["Contact", "contact.html"]

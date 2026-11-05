@@ -61,9 +61,3 @@ To create a personal digital portfolio that presents development skills, project
 **Technologies:** HTML, CSS, JavaScript, Google Apps Script, and Google Sheets.
 
 ---
-
-\<p align="center">
-
-**Building Ideas. Creating Experiences. Developing the Future.**
-
-\</p>

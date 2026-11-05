@@ -5,15 +5,15 @@ const SITE = {
   location: "Kathmandu · NEPAL",
   timezone: "Asia/Kathmandu",
   tzLabel: "NPT",
-  roles: ["Engineer · ", "[Skill] · [Skill] · [Skill]"],
-  tagline: "[One sentence about what you do and what you care about.]",
-  quote: "“[Your favourite line or personal motto.]”",
+  roles: ["Engineer · ", " SOE · DM ·", "Web · App ", "Data · AI"],
+  tagline: "Software Engineer | Problem Solver | Lifelong Learner",
+  quote: "“ All the world’s a stage, and all the men and women merely players. ”",
   photo: "assets/images/protraits.png",
   kingCard: "assets/images/joker.png",
   email: "bishal94110@gmail.com",
   cv: "",
   updated: "November 2026",
-  careerStart: 2013,
+  careerStart: 2022,
   typing: [
     "Building reliable software",
     "Designing clean systems",
@@ -29,13 +29,13 @@ const SITE = {
   ],
   links: [
     ["LinkedIn", "https://www.linkedin.com/"],
-    ["GitHub", "https://github.com/"],
-    ["X / Twitter", "https://x.com/"]
+    ["GitHub", "https://github.com/bishalhosts"],
+    ["Facebook", "https://www.facebook.com/bishal.regmi.831041"]
   ],
   about: [
-    "[Write 2-3 short paragraphs about yourself: your years of experience, your field, and what you are working on now.]",
-    "[Mention the kind of work you are proud of - systems built, people helped, results achieved.]",
-    "[Optional: personal interests, community work or volunteering.]"
+    " Bishal Regmi is a software engineer with a passion for building reliable and efficient systems. With a strong background in web development, data analysis, and project management, Bishal has contributed to various projects that have made a significant impact in the tech community.",
+    "  ",
+    " "
   ],
   focus: [
     "[Focus area one]",
@@ -64,95 +64,96 @@ const SITE = {
   },
   experience: [
     {
-      role: "[Current Position]",
-      org: "[Organisation]",
-      period: "2022 - Present",
-      desc: "[What you do here, in one or two lines.]"
+      role: "SOE · DM · IT Engineer",
+      org: "Bankingnews.com",
+      period: "2025 - Present",
+      desc: "Key responsibilities and achievements."
     },
-    {
-      role: "[Previous Position]",
-      org: "[Organisation]",
-      period: "2018 - 2022",
-      desc: "[Key responsibilities and achievements.]"
-    },
-    {
-      role: "[Earlier Position]",
-      org: "[Organisation]",
-      period: "2013 - 2018",
-      desc: "[Key responsibilities and achievements.]"
-    }
+    // {
+    //   role: "[Previous Position]",
+    //   org: "[Organisation]",
+    //   period: "2018 - 2022",
+    //   desc: "[Key responsibilities and achievements.]"
+    // },
+    // {
+    //   role: "[Earlier Position]",
+    //   org: "[Organisation]",
+    //   period: "2013 - 2018",
+    //   desc: "[Key responsibilities and achievements.]"
+    // }
   ],
   education: [
+    // {
+    //   degree: "[Master's Degree, Subject]",
+    //   school: "[University]",
+    //   year: "[Year]"
+    // },
     {
-      degree: "[Master's Degree, Subject]",
-      school: "[University]",
-      year: "[Year]"
-    },
-    {
-      degree: "[Bachelor's Degree, Subject]",
-      school: "[University]",
-      year: "[Year]"
+      degree: " BE. Software Engineering",
+      school: " Pokhara University",
+      year: "2026"
     }
   ],
   training: [
     {
-      title: "[Course or Fellowship Name]",
-      org: "[Institution]",
-      year: "2026"
-    },
-    {
-      title: "[Course or Fellowship Name]",
-      org: "[Institution]",
-      year: "2025"
-    },
-    {
-      title: "[Certification Name]",
-      org: "[Institution]",
+      title: "AWS Certified Solutions Architect - Associate",
+      org: "NCIT",
       year: "2024"
     },
-    {
-      title: "[Training Name]",
-      org: "[Institution]",
-      year: "2023"
-    }
+    // {
+    //   title: "[Course or Fellowship Name]",
+    //   org: "[Institution]",
+    //   year: "2025"
+    // },
+    // {
+    //   title: "[Certification Name]",
+    //   org: "[Institution]",
+    //   year: "2024"
+    // },
+    // {
+    //   title: "[Training Name]",
+    //   org: "[Institution]",
+    //   year: "2023"
+    // }
   ],
   projects: [
-    {
-      title: "[Project One]",
-      org: "[Organisation]",
-      type: "Official",
-      year: "2026",
-      desc: "[What it is, who it helps, and your role.]",
-      tags: ["Digital", "Public service"],
-      link: ""
-    },
-    {
-      title: "[Project Two]",
+     {
+      title: "Portfolio",
       org: "Personal",
       type: "Personal",
-      year: "2026",
-      desc: "[Short description.]",
-      tags: ["Community"],
-      link: ""
+      year: "2024",
+      desc: "personal portfolio website built with HTML, CSS, and JavaScript to showcase my work and skills.",
+      tags: ["portfolio", "web"],
+      link: "https://bishalhosts.github.io/BishalRegmi/"
     },
     {
-      title: "[Project Three]",
-      org: "[Organisation]",
+      title: "Janaprakash School Website",
+      org: "Janaprakash School",
+      type: "Official",
+      year: "2026",
+      desc: "Official website for Janaprakash School, providing information about the school, its programs, and resources for students and parents.",
+      tags: ["Digital", "Public service"],
+      link: "https://bishalhosts.github.io/janaprakashschool/"
+    },
+    {
+      title: "Hamro Nepal",
+      org: "News portal",
+      type: "Official",
+      year: "2026",
+      desc: "Official website for Hamro Nepal, a news portal covering local and national news.",
+      tags: ["News"],
+      link: "https://bishalhosts.github.io/HamroNepal/"
+    },
+    {
+      title: "Ma-yor",
+      org: "Personal",
       type: "Official",
       year: "2025",
-      desc: "[Short description.]",
-      tags: ["Systems"],
-      link: ""
+      desc: "Personal website for Ma-yor, showcasing my work and skills.",
+      tags: ["personal", "web"],
+      link: "https://bishalhosts.github.io/Ma-yor/"
     },
-    {
-      title: "[Project Four]",
-      org: "[Organisation]",
-      type: "Contributor",
-      year: "2024",
-      desc: "[Short description.]",
-      tags: ["Systems", "Policy"],
-      link: ""
-    },
+   /*
     {
       title: "[Project Five]",
       org: "Personal",
@@ -170,6 +171,6 @@ const SITE = {
       desc: "[Short description.]",
       tags: ["Research"],
       link: ""
-    }
+    } */
   ]
 };

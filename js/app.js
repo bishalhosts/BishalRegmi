@@ -356,10 +356,89 @@ function initBasketballGame(canvas) {
 function setupTalkAssistant() {
   const trigger = document.getElementById("talkTrigger"); if (!trigger || document.getElementById("talkPanel")) return; const panel = document.createElement("div"); panel.id = "talkPanel"; panel.className = "talk-panel hidden"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-label", "Let's Talk and Play assistant"); panel.innerHTML = `<div class="talk-header"><div><p class="mono">Let's Talk &amp; Play</p><h3>Developer Assistant</h3></div><div class="talk-actions"><button class="mini-btn" type="button" data-min="1" aria-label="Minimize chat">—</button><button class="mini-btn" type="button" data-close="1" aria-label="Close chat">×</button></div></div><div class="talk-body"><div class="welcome">Hi! I help with project questions, skills, and collaboration.</div><div class="quick-replies"><button type="button" class="quick-btn">Who are you?</button><button type="button" class="quick-btn">What are your skills?</button><button type="button" class="quick-btn">What technologies do you use?</button><button type="button" class="quick-btn">What projects have you developed?</button><button type="button" class="quick-btn">How can I contact you?</button><button type="button" class="quick-btn">Are you available for collaboration?</button><button type="button" class="quick-btn play-btn" data-action="play">Let's Play</button></div><div class="game-launcher hidden" id="gameLauncher"><div class="game-launcher-head"><span class="mono">QUICK PLAY</span><span>Choose a game</span></div><div class="game-launcher-grid"><button type="button" class="game-launch-btn" data-game="flappy"><span aria-hidden="true">✦</span> Flappy Bird</button><button type="button" class="game-launch-btn" data-game="basketball"><span aria-hidden="true">◉</span> Basketball</button></div></div><div class="game-console hidden" id="gameConsole"><div class="game-console-top"><button class="game-back" type="button" aria-label="Back to game selection">←</button><div class="game-console-heading"><span class="mono">MINI ARCADE</span><h4 class="game-console-title"></h4></div><button class="game-restart" type="button" data-game-restart aria-label="Restart game">↻</button></div><div class="game-console-tabs"><button type="button" class="game-tab" data-game="flappy">Flappy</button><button type="button" class="game-tab" data-game="basketball">Basketball</button></div><canvas id="gameCanvas" width="420" height="420" tabindex="0"></canvas><p class="game-console-hint"></p><p class="game-console-status" aria-live="polite"></p><button class="game-action" type="button" data-flap>FLAP <span>SPACE</span></button></div><div class="chat-log" id="chatLog" aria-live="polite"></div></div><form class="talk-input" id="assistantForm"><input id="assistantInput" type="text" placeholder="Ask me something..." aria-label="Type a message" autocomplete="off" /><button type="submit" id="assistantSend">Send</button></form>`; document.body.appendChild(panel);
   const chatLog = document.getElementById("chatLog"); const addMessage = (text, from) => { const row = document.createElement("div"); row.className = "chat-row " + from; row.textContent = text; chatLog.appendChild(row); chatLog.scrollTop = chatLog.scrollHeight; };
-  const respond = (text) => {
-    const q = text.toLowerCase(); const skillText = SITE.skills.slice(0, 6).join(", ");
-    if (q.includes("play") || q.includes("game")) { showGameLauncher(panel); addMessage("Absolutely — pick a game and I’ll launch it here.", "bot"); return; }
-    const msg = ((q.includes("who") || q.includes("you")) ? `I’m ${SITE.first} ${SITE.last}, a developer focused on ${SITE.roles.join(" • ")}. I build thoughtful digital experiences and practical software solutions.` : (q.includes("skill") || q.includes("skills")) ? `My core strengths include ${skillText}. I enjoy product thinking, clean systems, research, and collaboration.` : (q.includes("technolog") || q.includes("tech")) ? `I work with modern frontend and web tooling, including HTML, CSS, JavaScript, Git, APIs, responsive design, and product-focused implementation workflows.` : (q.includes("project") || q.includes("developed")) ? `I build portfolio work, prototypes, internal tools, and polished web experiences. You can explore the selected work in the projects section of this portfolio.` : (q.includes("contact") || q.includes("email") || q.includes("reach")) ? `You can reach me at ${SITE.email}. The contact form is also available on the contact page.` : (q.includes("available") || q.includes("collab") || q.includes("collaboration")) ? `Yes — I’m open to collaboration, product ideas, design partnerships, and thoughtful development work. Reach out with a brief summary and timeline.` : `I can help with project questions, skill details, tech stack, and collaboration possibilities. Try one of the quick replies.`);
+  let lastIntent = "";
+  const cleanItems = items => items.filter(item => item && !/\[[^\]]+\]/.test(String(item))).map(item => String(item).trim()).filter(Boolean);
+  const describeProjects = () => {
+    const projects = SITE.projects.filter(project => project.title && !/\[[^\]]+\]/.test(project.title));
+    return projects.length
+      ? `Here are some projects in the portfolio: ${projects.slice(0, 3).map(project => `${project.title}${project.desc && !/\[[^\]]+\]/.test(project.desc) ? ` — ${project.desc}` : ""}`).join("; ")}.`
+      : "I haven't added the project details to the portfolio yet. You can check the Projects page for updates.";
+  };
+  const describeExperience = () => {
+    const roles = SITE.experience.filter(item => item.role && !/\[[^\]]+\]/.test(item.role));
+    return roles.length
+      ? `Here is the experience listed in the portfolio: ${roles.slice(0, 3).map(item => `${item.role} at ${item.org}${item.period ? ` (${item.period})` : ""}`).join("; ")}.`
+      : "I haven't added work experience details to the portfolio yet.";
+  };
+  const responses = {
+    greeting: () => `I’m doing well, thanks for asking! What would you like to know about my work, skills, projects, or how to get in touch?`,
+    thanks: () => `You're welcome! Feel free to ask about my projects, skills, experience, or contact details.`,
+    compliment: () => `Thank you, that's kind of you! Is there anything you'd like to know about my portfolio?`,
+    identity: () => {
+      const roles = cleanItems(SITE.roles).map(role => role.replace(/[\s·|,]+$/g, ""));
+      return `I’m ${SITE.first} ${SITE.last}${roles.length ? `, ${roles.join(" and ")}` : ""}. ${cleanItems(SITE.about)[0] || "This portfolio has more information about my work, skills, and projects."}`;
+    },
+    skills: () => {
+      const skills = cleanItems(SITE.skills);
+      const focus = cleanItems(SITE.focus);
+      return skills.length ? `The skills listed in my portfolio include ${skills.join(", ")}${focus.length ? `. My current focus areas include ${focus.join(", ")}` : ""}.` : "I haven't added my skills to the portfolio yet.";
+    },
+    technologies: () => {
+      const technicalSkills = cleanItems(SITE.skills).filter(skill => /web|software|program|develop|data|digital|technology|tech|design|api|javascript|html|css/i.test(skill));
+      return technicalSkills.length
+        ? `The technology-related skills listed in my portfolio are ${technicalSkills.join(", ")}. Ask me about a specific project if you'd like more context.`
+        : "I haven't listed a technology stack in the portfolio yet. The Skills and Projects pages may have more details.";
+    },
+    projects: describeProjects,
+    experience: describeExperience,
+    education: () => {
+      const education = SITE.education.filter(item => item.degree && !/\[[^\]]+\]/.test(item.degree));
+      return education.length
+        ? `The education listed in my portfolio is ${education.map(item => `${item.degree}${item.school ? ` at ${item.school}` : ""}${item.year && !/\[[^\]]+\]/.test(item.year) ? ` (${item.year})` : ""}`).join("; ")}.`
+        : "I haven't added education details to the portfolio yet.";
+    },
+    training: () => {
+      const training = SITE.training.filter(item => item.title && !/\[[^\]]+\]/.test(item.title));
+      return training.length
+        ? `The training and certifications listed are ${training.map(item => `${item.title}${item.org && !/\[[^\]]+\]/.test(item.org) ? ` from ${item.org}` : ""}${item.year ? ` (${item.year})` : ""}`).join("; ")}.`
+        : "I haven't added training or certification details to the portfolio yet.";
+    },
+    location: () => `I'm based in ${SITE.location}.`,
+    contact: () => `You can email me at ${SITE.email}, or use the Contact page to send a message.`,
+    collaboration: () => `For collaboration or availability, please email me at ${SITE.email} with a short description of the idea and timeline. I can confirm whether it’s a good fit.`,
+    about: () => cleanItems(SITE.about).join(" ") || `I’m ${SITE.first} ${SITE.last}. You can ask me about my skills, projects, or experience.`,
+    followup: () => `Which part would you like to know more about: ${lastIntent === "projects" ? "a particular project" : lastIntent === "experience" ? "a particular role" : lastIntent}?`
+  };
+  const detectIntent = text => {
+    const q = text.toLowerCase().replace(/[^\p{L}\p{N}\s']/gu, " ").replace(/\s+/g, " ").trim();
+    if (/^(hi|hello|hey|good morning|good afternoon|good evening|how are you)[!. ]*$/.test(q)) return "greeting";
+    if (/\b(thanks|thank you|thx|appreciate it)\b/.test(q)) return "thanks";
+    if (/\b(love you|i love|great site|nice site|good job|well done|you are great)\b/.test(q)) return "compliment";
+    if (/\b(play|game|flappy|basketball)\b/.test(q)) return "play";
+    if (/\b(what is your name|what's your name|who are you|tell me about yourself|about you)\b/.test(q)) return "identity";
+    if (/\b(technology|technologies|tech stack|tools|programming language|framework)\b/.test(q)) return "technologies";
+    if (/\b(skill|skills|strength|strengths|good at|expertise)\b/.test(q)) return "skills";
+    if (/\b(project|projects|portfolio work|built|developed|made)\b/.test(q)) return "projects";
+    if (/\b(experience|career|job|work history|worked)\b/.test(q)) return "experience";
+    if (/\b(education|degree|university|college|study|studied)\b/.test(q)) return "education";
+    if (/\b(training|certification|certificate|course|courses)\b/.test(q)) return "training";
+    if (/\b(where do you live|where are you based|location|which country|which city)\b/.test(q)) return "location";
+    if (/\b(contact|email|reach you|get in touch)\b/.test(q)) return "contact";
+    if (/\b(available|availability|collaborat|hire|freelance|work together)\b/.test(q)) return "collaboration";
+    if (/^(tell me more|more details|elaborate|go on|and what else)\b/.test(q) && lastIntent) return "followup";
+    if (/\b(what do you do|about|your work|yourself)\b/.test(q)) return "about";
+    return "unknown";
+  };
+  const respond = text => {
+    const intent = detectIntent(text);
+    if (intent === "play") { showGameLauncher(panel); addMessage("Choose a game and I’ll launch it here.", "bot"); return; }
+    if (intent === "followup") {
+      const msg = lastIntent && responses[lastIntent] ? responses[lastIntent]() : responses.about();
+      addMessage(msg, "bot");
+      return;
+    }
+    lastIntent = intent === "unknown" ? lastIntent : intent;
+    const msg = responses[intent] ? responses[intent]() : `I may have misunderstood “${text}.” I can give details about ${["skills", "projects", "experience", "education", "training", "location", "contact"].join(", ")}. Which topic did you mean?`;
     addMessage(msg, "bot");
   };
   addMessage("Welcome! I’m here to answer quick questions about the portfolio, my work, and collaboration.", "bot");

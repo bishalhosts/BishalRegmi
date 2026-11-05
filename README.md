@@ -7,9 +7,11 @@ Plain HTML + CSS + vanilla JavaScript. No frameworks, no build step. Free hostin
 - **Animated glowing ring** (rotating light + soft pulse) around the profile card.
 - **Single-line Nepali calendar** under the menu on every page: `आज: १८ कार्तिक २०८३, बुधबार | 04 November 2026`. Uses a built-in Bikram Sambat table (BS 2000-2100), so it needs no internet or API and changes by itself at midnight (Nepal time).
 - **Live info**: Nepal clock (Asia/Kathmandu), greeting by time of day, years of experience, auto copyright year, terminal typing line.
-- **Floating Let's Talk & Play assistant** with portfolio-focused quick replies and a local keyword-based chat helper.
+- **Floating Let's Talk & Play assistant** with portfolio-aware replies about skills, projects, experience, education, training and contact details. It reads its answers from `js/data.js` and works locally without an AI service.
 - **Let's Play mini-arcade inside the assistant**: Flappy Bird supports tap / Space / flap controls; Basketball uses a drag-and-release shot challenge. Both games include restart and back controls and are built with HTML5 canvas and vanilla JavaScript.
 - **Contact form -> Google Sheets** with validation, loading spinner, toast notifications, double-click / duplicate protection and spam protection.
+
+The Google Apps Script is only used to receive contact-form submissions; it does not power the chat assistant. The assistant is a local rule-based helper, not a generative AI chatbot.
 
 ## 1. Edit your content
 Open `js/data.js` and replace every `[bracketed]` placeholder. Add your profile portrait to `assets/images/` and set `photo:`. To replace the King artwork, add your image to `assets/images/` and set `kingCard:` to its relative path, for example `kingCard: "assets/images/my-king-card.png"`. Leave `kingCard: ""` to use the built-in King of Hearts artwork. `careerStart` drives the "years of experience" chip. Colours are variables at the top of `css/style.css`.

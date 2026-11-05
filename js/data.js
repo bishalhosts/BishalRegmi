@@ -38,10 +38,10 @@ const SITE = {
     " "
   ],
   focus: [
-    "[Focus area one]",
-    "[Focus area two]",
-    "[Focus area three]",
-    "[Focus area four]"
+    
+     "learning",
+    // "[Focus area three]",
+    // "[Focus area four]"
   ],
   skills: [
     "Project management",

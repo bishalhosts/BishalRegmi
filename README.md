@@ -1,42 +1,69 @@
-# Developer Portfolio (GitHub Pages + Google Sheets contact form)
-Plain HTML + CSS + vanilla JavaScript. No frameworks, no build step. Free hosting on GitHub Pages; Google Apps Script + Google Sheets store contact messages.
+# 💻 Developer Portfolio
 
-## What is included
-- **Developer dark theme** (light mode available from the header button): navy background, subtle grid, soft glows and a few drifting code symbols.
-- **Profile flip card**: click / tap / press Enter on the **King of Hearts** card to flip to the profile portrait (3D flip, hover tilt and shine). Both images are replaceable in `js/data.js`.
-- **Animated glowing ring** (rotating light + soft pulse) around the profile card.
-- **Single-line Nepali calendar** under the menu on every page: `आज: १८ कार्तिक २०८३, बुधबार | 04 November 2026`. Uses a built-in Bikram Sambat table (BS 2000-2100), so it needs no internet or API and changes by itself at midnight (Nepal time).
-- **Live info**: Nepal clock (Asia/Kathmandu), greeting by time of day, years of experience, auto copyright year, terminal typing line.
-- **Floating Let's Talk & Play assistant** with portfolio-aware replies about skills, projects, experience, education, training and contact details. It reads its answers from `js/data.js` and works locally without an AI service.
-- **Let's Play mini-arcade inside the assistant**: Flappy Bird supports tap / Space / flap controls; Basketball uses a drag-and-release shot challenge. Both games include restart and back controls and are built with HTML5 canvas and vanilla JavaScript.
-- **Contact form -> Google Sheets** with validation, loading spinner, toast notifications, double-click / duplicate protection and spam protection.
+A modern, interactive developer portfolio built with HTML, CSS, and Vanilla JavaScript. Designed to showcase personal information, skills, projects, experience, and contact details through a responsive interface.
 
-The Google Apps Script is only used to receive contact-form submissions; it does not power the chat assistant. The assistant is a local rule-based helper, not a generative AI chatbot.
+The portfolio features a developer-inspired dark theme, interactive profile card, Nepali calendar, live Nepal clock, mini-games, and a contact form connected to Google Sheets.
 
-## 1. Edit your content
-Open `js/data.js` and replace every `[bracketed]` placeholder. Add your profile portrait to `assets/images/` and set `photo:`. To replace the King artwork, add your image to `assets/images/` and set `kingCard:` to its relative path, for example `kingCard: "assets/images/my-king-card.png"`. Leave `kingCard: ""` to use the built-in King of Hearts artwork. `careerStart` drives the "years of experience" chip. Colours are variables at the top of `css/style.css`.
+## ✨ Key Features
 
-**Recommended image sizes for the flip card**
-- Profile portrait (`photo`): **900 x 1200 px** (3:4) recommended.
-- King card artwork (`kingCard`): **900 x 1260 px** (5:7) recommended for the card design shown. The card displays the complete image without cropping and softly blurs the sides to fill the 3:4 card frame.
+- Modern developer-inspired dark theme.
+- Light and Dark mode.
+- Interactive 3D King of Hearts profile flip card.
+- Animated glowing profile ring.
+- Automatic Nepali BS calendar and AD date display.
+- Live Nepal-time clock.
+- Dynamic greeting and experience counter.
+- Floating Let's Talk chatbot.
+- Mini-game arcade with Flappy Bird and Basketball.
+- Contact form with Google Sheets integration.
+- Email notifications for new contact messages.
+- Responsive design for desktop, tablet, and mobile.
 
-PNG, JPG, and WebP are suitable. Other image sizes also work; the complete image stays visible, with a blurred extension filling any leftover frame area.
+## 🛠️ Technologies Used
 
-## 2. Connect the contact form to Google Sheets (about 10 minutes)
-1. Sign in to Google (bishal94110@gmail.com is already set as the notification e-mail in the script) and open https://script.google.com -> **New project**.
-2. Delete the sample code and paste the whole of `google-apps-script/Code.gs`. Save.
-3. Choose the function **setup** in the toolbar and press **Run**. Allow the permissions (Google may show "unverified app" - choose Advanced -> continue, it is your own script). Open **Execution log** to see the link of the new spreadsheet **Portfolio Contact Messages**.
-4. **Deploy -> New deployment -> select type: Web app.** Set *Execute as*: **Me** and *Who has access*: **Anyone**. Click Deploy and copy the **Web app URL** (it ends with `/exec`).
-5. Paste the URL into `js/data.js`: `API: "https://script.google.com/macros/s/.../exec"`.
-6. Example config template: `google-apps-script/config.example.js` shows where to paste the deployed URL before editing `js/data.js`.
-7. Upload the site to GitHub and send a test message from the Contact page. A new row appears in the sheet (ID, Nepal date and time, name, email, subject, message, status) and you get an e-mail.
-8. Later changes to `Code.gs`: **Deploy -> Manage deployments -> Edit -> Version: New version**.
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- HTML5 Canvas
+- Google Apps Script
+- Google Sheets
 
-**Security:** no key or password exists anywhere in the website files. The public Web app URL can only add messages; it can never read them. The server validates every field, blocks formula injection, rejects spam (hidden field, rate limit, duplicate check) and keeps the sheet private to your Google account. Until `API` is set, the form shows a clear "not connected" error instead of pretending to send.
+## 🎮 Interactive Features
 
-## 3. Publish on GitHub Pages
-Create a repository named `yourusername.github.io`, upload all files of this folder (including `.nojekyll`), then Settings -> Pages -> Deploy from branch `main` / root. Put the final address in `siteUrl` in `js/data.js`.
+**Let's Talk:** A local rule-based assistant that answers questions about the developer's skills, projects, education, experience, and contact information.
 
-## Notes
-- The Nepali calendar table covers BS 2000-2100 (to about 2043 AD) and was checked against a reference library on thousands of dates. Official future calendars are published yearly; the table is correct for the published data.
-- Browser requirement: any modern browser (Chrome, Edge, Safari, Firefox).
+**Let's Play:** An integrated mini-arcade featuring Flappy Bird and Basketball games.
+
+**Profile Flip Card:** An interactive 3D playing-card design that reveals the developer's portrait.
+
+## 📩 Contact System
+
+The contact form connects to Google Sheets through Google Apps Script.
+
+- Stores submitted messages.
+- Validates user input.
+- Provides submission notifications.
+- Includes spam and duplicate-submission protection.
+- Sends email notifications for new messages.
+
+The chatbot operates locally and does not require an external AI service.
+
+## 🎯 Project Purpose
+
+To create a personal digital portfolio that presents development skills, projects, experience, and personality through an engaging and interactive user experience.
+
+## 👨‍💻 Developer
+
+**Developer:** Bishal regmi
+
+**Project:** Developer Portfolio
+
+**Technologies:** HTML, CSS, JavaScript, Google Apps Script, and Google Sheets.
+
+---
+
+\<p align="center">
+
+**Building Ideas. Creating Experiences. Developing the Future.**
+
+\</p>
